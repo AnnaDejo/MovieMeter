@@ -1,0 +1,20 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.welcome-section h1 {
+  color: #e50914; /* Netflix red */
+  font-size: 2.5rem;
+}
+
+.welcome-section p {
+  font-size: 1.2rem;
+  color: #555;
+}
