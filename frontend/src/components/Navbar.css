@@ -1,0 +1,101 @@
+/* Navbar wrapper */
+.navbar {
+  background-color: #000; /* IMDb uses black */
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 100;
+}
+
+/* Logo styling */
+.nav-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e50914; /* Netflix Red */
+  text-decoration: none;
+}
+
+/* Search bar */
+.nav-search {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 20px;
+  position: relative;
+}
+
+.nav-search input {
+  width: 100%;
+  padding: 8px 35px 8px 12px;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+  background-color: #1c1c1c;
+  color: white;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 9px;
+  color: #888;
+  pointer-events: none;
+}
+
+/* Desktop Links */
+.nav-right.desktop-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #e50914;
+}
+
+/* Hamburger (mobile only) */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: #111;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 15px;
+  border-top: 1px solid #222;
+}
+
+/* Responsive rules */
+@media (max-width: 768px) {
+  .nav-search {
+    display: none;
+  }
+
+  .nav-right.desktop-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

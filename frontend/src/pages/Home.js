@@ -9,7 +9,6 @@ function Home() {
         <div className="hero-overlay">
           <h1>🎬 Welcome to MovieMeter</h1>
           <p>Discover top-rated movies and dive into your favorites!</p>
-          <button className="cta-button">Explore Now</button>
         </div>
       </header>
 
