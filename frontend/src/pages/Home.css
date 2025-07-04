@@ -1,12 +1,21 @@
 .home-container {
+  display: flex;
+  min-height: 100vh;
   background-color: #121212;
   color: #ffffff;
   font-family: 'Segoe UI', sans-serif;
-  min-height: 100vh;
 }
 
+.main-content {
+  margin-left: 200px;
+  padding-top: 60px;
+  width: calc(100% - 200px);
+  overflow-x: hidden;
+}
+
+
+/* Hero Section */
 .hero-section {
-  background-image: url('https://images.unsplash.com/photo-1581905764498-81f1c0117f4b');
   background-size: cover;
   background-position: center;
   height: 60vh;
@@ -15,6 +24,7 @@
   justify-content: center;
   text-align: center;
   position: relative;
+  padding: 20px;
 }
 
 .hero-section::before {
@@ -22,24 +32,23 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
 }
 
-.hero-section h1,
-.hero-section p,
-.cta-button {
-  position: relative;
+.hero-overlay {
   z-index: 1;
+  position: relative;
 }
 
 .hero-section h1 {
   font-size: 3rem;
   margin-bottom: 10px;
-  color: #ffffff;
+  color: #f6121d;
 }
 
 .hero-section p {
   font-size: 1.2rem;
-  color: #cccccc;
+  color: #f6121d;
   margin-bottom: 20px;
 }
 
@@ -57,6 +66,7 @@
   background-color: #f6121d;
 }
 
+/* Trending section */
 .trending-section {
   padding: 40px 60px;
 }
@@ -67,4 +77,16 @@
   color: #ffffff;
   border-left: 4px solid #e50914;
   padding-left: 12px;
+}
+
+/* Optional: Responsive fix */
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
 }

@@ -3,7 +3,7 @@ import "./MovieList.css";
 
 function MovieList() {
   const [allMovies, setAllMovies] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(5);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/movies")
@@ -18,7 +18,7 @@ function MovieList() {
   }, []);
 
   const handleShowMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 5, 15));
+    setVisibleCount((prev) => Math.min(prev + 4, 16));
   };
 
   const visibleMovies = allMovies.slice(0, visibleCount);
