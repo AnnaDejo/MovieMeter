@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
-import MovieList from "../components/MovieList";
-import Sidebar from "../components/Sidebar";
+import Sidebar from '../components/Sidebar';
+import MovieList from '../components/MovieList';
 
 function Home() {
+  const [sidebarExpanded, setSidebarExpanded] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarExpanded(prev => !prev);
+  };
+
   return (
     <div className="home-container">
-      <Sidebar />
+      <Sidebar isExpanded={sidebarExpanded} toggleSidebar={toggleSidebar} />
 
-      <div className="main-content">
+      <div className={`main-content ${sidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
         <header className="hero-section">
           <div className="hero-overlay">
             <h1>Welcome to MovieMeter</h1>
@@ -18,7 +24,7 @@ function Home() {
 
         <section className="trending-section">
           <h2 className="section-title">Trending Movies</h2>
-          <MovieList />
+          <MovieList sidebarExpanded={sidebarExpanded} />
         </section>
       </div>
     </div>

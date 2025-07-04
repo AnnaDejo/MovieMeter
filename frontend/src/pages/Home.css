@@ -1,92 +1,44 @@
 .home-container {
   display: flex;
-  min-height: 100vh;
   background-color: #121212;
-  color: #ffffff;
-  font-family: 'Segoe UI', sans-serif;
+  color: white;
 }
 
 .main-content {
-  margin-left: 200px;
+  margin-left: 60px;
+  width: 100%;
+  transition: margin-left 0.3s ease;
   padding-top: 60px;
-  width: calc(100% - 200px);
-  overflow-x: hidden;
 }
 
+.main-content.sidebar-expanded {
+  margin-left: 200px;
+}
 
-/* Hero Section */
 .hero-section {
-  background-size: cover;
-  background-position: center;
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
   padding: 20px;
+  background: linear-gradient(to right, #000, #121212);
+  text-align: center;
 }
 
-.hero-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 0;
-}
-
-.hero-overlay {
-  z-index: 1;
-  position: relative;
-}
-
-.hero-section h1 {
+.hero-overlay h1 {
+  color: #f6121d;
   font-size: 3rem;
   margin-bottom: 10px;
-  color: #f6121d;
 }
 
-.hero-section p {
+.hero-overlay p {
+  color: #f6121d;
   font-size: 1.2rem;
-  color: #f6121d;
-  margin-bottom: 20px;
 }
 
-.cta-button {
-  padding: 12px 24px;
-  background-color: #e50914;
-  border: none;
-  border-radius: 4px;
-  color: #ffffff;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.cta-button:hover {
-  background-color: #f6121d;
-}
-
-/* Trending section */
 .trending-section {
   padding: 40px 60px;
 }
 
 .section-title {
-  font-size: 2rem;
-  margin-bottom: 24px;
-  color: #ffffff;
   border-left: 4px solid #e50914;
-  padding-left: 12px;
-}
-
-/* Optional: Responsive fix */
-@media (max-width: 768px) {
-  .home-container {
-    flex-direction: column;
-  }
-
-  .main-content {
-    margin-left: 0;
-    width: 100%;
-  }
+  padding-left: 10px;
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
