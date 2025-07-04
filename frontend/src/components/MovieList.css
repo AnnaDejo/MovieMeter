@@ -1,51 +1,96 @@
+body {
+  background-color: #121212;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.movie-container {
+  padding: 20px;
+}
+
+.movie-title-header {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
 .movie-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 30px;
+  justify-items: center;
+}
+
+/* Frame around each movie */
+.movie-frame {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.movie-frame:hover {
+  transform: translateY(-5px);
 }
 
 .movie-card {
+  width: 160px;
+  text-align: center;
   position: relative;
-  width: 180px;
-  margin: 15px;
-  border-radius: 10px;
-  overflow: hidden;
 }
 
+.poster-wrapper {
+  position: relative;
+  display: inline-block;
+}
 
-
-.movie-card img {
+.movie-poster {
   width: 100%;
-  height: 270px;
+  height: 240px;
   object-fit: cover;
-  display: block;
+  border-radius: 8px;
 }
 
+/* ⭐ Yellow rating badge at bottom-right */
 .rating-badge {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: rgba(255, 204, 0, 0.9);
+  bottom: -10px;
+  right: -10px;
+  background-color: #f1c40f;
   color: #000;
-  font-weight: 600;
-  padding: 4px 12px;
-  font-size: 0.85rem;
-  border-radius: 999px; /* Oval shape */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
-
-.movie-info {
-  padding: 12px;
+.movie-info h3 {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #ffffff;
+  word-wrap: break-word;
 }
 
-.movie-info h3 {
-  margin: 0;
-  font-size: 1rem;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.show-more-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.show-more-link {
+  color: #f1c40f;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.show-more-link:hover {
+  color: #e1b700;
+  text-decoration: underline;
 }
