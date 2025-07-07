@@ -21,71 +21,79 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Register data submitted:", form);
-    // Backend API integration will be done later
+    // backend integration goes here
   };
 
   return (
-    <div className="register-container">
-      <h2 className="register-title">Create Account</h2>
-      <form className="register-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-
-        <div className="password-field">
+    <div className="register-page">
+      <div className="register-form-container">
+        <h2 className="register-title">Create Account</h2>
+        <form className="register-form" onSubmit={handleSubmit}>
           <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder="Password"
-            value={form.password}
+            type="text"
+            name="name"
+            className="register-input"
+            placeholder="Full Name"
+            value={form.name}
             onChange={handleChange}
             required
           />
-          <span
-            className="toggle-visibility"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
-        </div>
 
-        <div className="password-field">
           <input
-            type={showConfirmPassword ? "text" : "password"}
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={form.confirmPassword}
+            type="email"
+            name="email"
+            className="register-input"
+            placeholder="Email Address"
+            value={form.email}
             onChange={handleChange}
             required
           />
-          <span
-            className="toggle-visibility"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
-        </div>
 
-        <button type="submit" className="register-button">Sign Up</button>
+          <div className="password-field">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              className="register-input"
+              placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <span
+              className="toggle-visibility"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
 
-        <p className="login-link">
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
-      </form>
+          <div className="password-field">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              className="register-input"
+              placeholder="Confirm Password"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+            <span
+              className="toggle-visibility"
+              onClick={() =>
+                setShowConfirmPassword(!showConfirmPassword)
+              }
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+
+          <button type="submit" className="register-button">Sign Up</button>
+
+          <p className="login-link">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }
