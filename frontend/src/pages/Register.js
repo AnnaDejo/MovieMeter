@@ -18,11 +18,32 @@ function Register() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Register data submitted:", form);
-    // backend integration goes here
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (form.password !== form.confirmPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/users/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        password: form.password
+      }),
+    });
+
+    const message = await response.text();
+    alert(message);
+  } catch (err) {
+    console.error("Registration failed:", err);
+    alert("Something went wrong");
+  }
+};
 
   return (
     <div className="register-page">
