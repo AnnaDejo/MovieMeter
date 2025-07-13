@@ -1,0 +1,68 @@
+/* Container that holds the entire hero backdrop */
+.hero-3d-stack {
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Stack of cards centered in the container */
+.stack-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Each movie card */
+.hero-card {
+  width: 250px;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+
+/* Title of the movie displayed on center card */
+.hero-card h3 {
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  backdrop-filter: blur(15px);
+  font-weight: 500;
+}
+
+/* Fade out far cards for realism */
+@media (max-width: 768px) {
+  .hero-card {
+    width: 180px;
+    height: 280px;
+  }
+
+  .hero-card h3 {
+    font-size: 1rem;
+  }
+}
