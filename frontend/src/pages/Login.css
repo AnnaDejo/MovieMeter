@@ -1,4 +1,4 @@
-/* Fullscreen dark background */
+/* Container */
 .login-container {
   background-color: #000;
   min-height: 100vh;
@@ -6,9 +6,9 @@
   justify-content: center;
   align-items: center;
   font-family: 'Segoe UI', sans-serif;
+  position: relative;
 }
 
-/* Login box */
 .login-box {
   background-color: rgba(255, 255, 255, 0.07);
   padding: 40px 30px;
@@ -18,18 +18,18 @@
   box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
 }
 
-/* Form styles */
-.login-form {
-  display: flex;
-  flex-direction: column;
+.login-form-title {
+  text-align: center;
+  color: #f6121d;
+  font-size: 2rem;
+  margin-bottom: 25px;
 }
 
-/* Input fields */
+/* Form Inputs */
 .login-form input[type="email"],
 .password-field input {
   width: 100%;
   padding: 12px;
-  padding-right: 44px;
   font-size: 1rem;
   border-radius: 6px;
   border: 1px solid #444;
@@ -38,15 +38,17 @@
   margin-bottom: 15px;
   box-sizing: border-box;
   transition: border-color 0.3s;
+  padding-right: 44px;
 }
 
-.login-form input:focus {
+.login-form input:focus,
+.password-field input:focus {
   outline: none;
   border-color: #f6121d;
 }
 
-/* Submit button */
 .login-button {
+  width: 100%;
   background-color: #e50914;
   border: none;
   padding: 12px;
@@ -55,37 +57,28 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
+  margin-top: 10px;
   transition: background-color 0.3s ease;
-  margin-top: 5px;
 }
 
 .login-button:hover {
   background-color: #f6121d;
 }
 
-/* Title */
-.login-form-title {
-  text-align: center;
-  color: #f6121d;
-  font-size: 2rem;
-  margin-bottom: 25px;
-}
-
-/* Password field container */
 .password-field {
   position: relative;
+  width: 100%;
 }
 
-/* Toggle eye icon */
 .toggle-visibility {
   position: absolute;
-  right: 14px;
   top: 50%;
+  right: 12px;
   transform: translateY(-50%);
   color: #f4c10f;
-  cursor: pointer;
   font-size: 1.1rem;
-  user-select: none;
+  cursor: pointer;
+  z-index: 2;
 }
 
 /* Register link */
@@ -103,4 +96,98 @@
 
 .register-link a:hover {
   text-decoration: underline;
+}
+
+/* Modal for error */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-box h3 {
+  color: #b30000;
+  font-size: 1.3rem;
+}
+
+/* Clapperboard Animation Screen */
+.clapper-animation-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+  animation: screenFadeInOut 3.5s ease-in-out forwards;
+}
+
+.clapper-container {
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.clipboard-icon {
+  color: #64645f;
+  font-size: 10rem;
+  margin-bottom: 16px;
+  animation: pulseZoom 1.8s ease-in-out infinite;
+}
+
+.redirecting-text {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Animations */
+@keyframes pulseZoom {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceText {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes screenFadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
 }

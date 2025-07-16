@@ -1,7 +1,5 @@
 package com.example.backend.controller;
 
-import java.util.regex.Pattern;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,16 +23,11 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public String registerUser(@RequestBody User user) {
+    public String registerUser(@RequestBody User user) 
+    {
         // Check if email already exists
         if (userRepository.existsByEmail(user.getEmail())) {
             return "Email is already registered.";
-        }
-
-        // Validate password
-        String password = user.getPassword();
-        if (!isValidPassword(password)) {
-            return "Password must be at least 8 characters and include a special character.";
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -42,8 +35,20 @@ public class UserController {
         return "Registration successful!";
     }
 
-    private boolean isValidPassword(String password) {
-        // Minimum 8 characters, at least one special character
-        return password.length() >= 8 && Pattern.compile("[^a-zA-Z0-9]").matcher(password).find();
+    @PostMapping("/login")
+    public String loginUser(@RequestBody User user) 
+    {
+        User existingUser = userRepository.findByEmail(user.getEmail());
+
+        if (existingUser == null) {
+            return "User not found";
+        }
+
+        if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+            return "Invalid password";
+        }
+
+        return "Login successful!";
     }
+
 }

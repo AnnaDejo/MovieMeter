@@ -4,19 +4,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./Register.css";
 
 function Register() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
-
+  const [form, setForm] = useState({name: "",email: "",password: "",confirmPassword: "",});
+  const [errors, setErrors] = useState({email: "",password: "",confirmPassword: ""});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -32,7 +21,8 @@ function Register() {
     return password.length >= 8 && /[^a-zA-Z0-9]/.test(password);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e) => 
+  {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
 
