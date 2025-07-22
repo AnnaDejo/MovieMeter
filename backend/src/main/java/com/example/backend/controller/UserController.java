@@ -1,5 +1,8 @@
 package com.example.backend.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.model.LoginHistory;
 import com.example.backend.model.User;
+import com.example.backend.repository.LoginHistoryRepository;
 import com.example.backend.repository.UserRepository;
 
 @RestController
@@ -21,6 +26,10 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private LoginHistoryRepository loginHistoryRepository;
+
 
     @PostMapping("/register")
     public String registerUser(@RequestBody User user) 
@@ -47,6 +56,15 @@ public class UserController {
         if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
             return "Invalid password";
         }
+
+        // Save login history
+        LoginHistory history = new LoginHistory(
+            existingUser.getName(),
+            existingUser.getEmail(),
+            LocalDate.now(),
+            LocalTime.now()
+        );
+        loginHistoryRepository.save(history);
 
         return "Login successful!";
     }
