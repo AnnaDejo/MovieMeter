@@ -1,9 +1,11 @@
 /* Container and layout */
 .home-container {
   display: flex;
-  background-color: #121212;
+  background-color: #121212; /* Matches global */
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  min-height: calc(100vh - 60px); /* Ensures it fills below navbar */
 }
 
 /* Main content area */

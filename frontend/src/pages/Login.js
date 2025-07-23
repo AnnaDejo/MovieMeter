@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { BiSolidMoviePlay } from "react-icons/bi";
+import { useUser } from "../contexts/UserContext";
 
 function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -11,7 +12,8 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const [showClapperAnimation, setShowClapperAnimation] = useState(false);
 
-  const navigate = useNavigate(); // ✅ React router navigation
+  const navigate = useNavigate();
+  const { login } = useUser(); // ✅ Access login method from context
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,26 +28,24 @@ function Login() {
         body: JSON.stringify(form),
       });
 
-      const message = await response.text();
+      const data = await response.json();
+      console.log("Login Response", data); 
 
-      if (message === "Login successful!") {
+      if (response.ok) {
+        login(data); // ✅ Fixed: directly pass the user object
         setShowClapperAnimation(true);
         setTimeout(() => {
-          navigate("/"); // ✅ Prevents reload, retains session
+          navigate("/");
         }, 3500);
       } else {
-        setErrorMessage(message);
+        setErrorMessage(data.message || "Login failed.");
         setShowErrorModal(true);
-        setTimeout(() => {
-          setShowErrorModal(false);
-        }, 3000);
+        setTimeout(() => setShowErrorModal(false), 3000);
       }
     } catch (err) {
       setErrorMessage("Something went wrong. Please try again.");
       setShowErrorModal(true);
-      setTimeout(() => {
-        setShowErrorModal(false);
-      }, 3000);
+      setTimeout(() => setShowErrorModal(false), 3000);
     }
   };
 

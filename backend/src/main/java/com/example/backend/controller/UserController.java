@@ -2,8 +2,10 @@ package com.example.backend.controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.dto.UserLoginResponse;
 import com.example.backend.model.LoginHistory;
 import com.example.backend.model.User;
 import com.example.backend.repository.LoginHistoryRepository;
@@ -30,31 +33,29 @@ public class UserController {
     @Autowired
     private LoginHistoryRepository loginHistoryRepository;
 
-
     @PostMapping("/register")
-    public String registerUser(@RequestBody User user) 
-    {
-        // Check if email already exists
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
-            return "Email is already registered.";
+            return ResponseEntity.badRequest().body("Email is already registered.");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return "Registration successful!";
+        return ResponseEntity.ok("Registration successful!");
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestBody User user) 
-    {
-        User existingUser = userRepository.findByEmail(user.getEmail());
+    public ResponseEntity<?> loginUser(@RequestBody User user) {
+        Optional<User> optionalUser = userRepository.findByEmail(user.getEmail());
 
-        if (existingUser == null) {
-            return "User not found";
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.status(404).body("User not found");
         }
 
+        User existingUser = optionalUser.get();
+
         if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-            return "Invalid password";
+            return ResponseEntity.status(401).body("Invalid password");
         }
 
         // Save login history
@@ -66,7 +67,12 @@ public class UserController {
         );
         loginHistoryRepository.save(history);
 
-        return "Login successful!";
-    }
+        // Send name and email in response
+        UserLoginResponse response = new UserLoginResponse(
+            existingUser.getName(),
+            existingUser.getEmail()
+        );
 
+        return ResponseEntity.ok(response);
+    }
 }

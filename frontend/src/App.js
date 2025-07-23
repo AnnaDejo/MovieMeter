@@ -3,32 +3,51 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { UserProvider } from "./contexts/UserContext";
+import './index.css';
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
-  const hideNavbarRoutes = ["/register", "/login"]; // ⛔ no navbar here
-
+  const hideNavbarRoutes = ["/register", "/login"];
   const hideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
     <>
       {!hideNavbar && <Navbar />}
-      {children}
+      <div
+        style={{
+          marginTop: hideNavbar ? 0 : "60px",
+          minHeight: "100vh",
+          backgroundColor: "#121212", // Matches Home.css
+          color: "#fff",
+        }}
+      >
+        {children}
+      </div>
     </>
+  );
+}
+
+
+function AppRoutes() {
+  return (
+    <LayoutWrapper>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </LayoutWrapper>
   );
 }
 
 function App() {
   return (
-    <Router>
-      <LayoutWrapper>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </LayoutWrapper>
-    </Router>
+    <UserProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </UserProvider>
   );
 }
 
